@@ -1,9 +1,5 @@
-<#
-    .SYNOPSIS
-        Play-Game.ps1 used for examples and warm up in workshop
-#>
-$CardDeck = Get-Content .\symbols.txt
-$CardsNotAvailable = @()
+$CardDeck = Get-Content .\Cards.txt
+$CardsNotAvailable = Get-Content .\CardsNotAvailable.txt -ErrorAction SilentlyContinue
 function Flip-Coin
 {
     <#
@@ -26,17 +22,16 @@ function Get-PowerShellCard
         .EXAMPLE
             Get-PowerShellCard
     #>
+    [CmdletBinding()]
     param
     (
-        $CardDeck = $Script:CardDeck
-        ,
-        $CardsNotAvailable = $Script:CardNotAvailable
     )
     process
     {
         # Which Cards are no longer available?
         do
         {
+            $CardsNotAvailable = Get-Content .\CardsNotAvailable.txt -ErrorAction SilentlyContinue
             $CardToPick = Get-Random -Minimum 0 -Maximum ($CardDeck.Count-1)
         }
         until
@@ -44,7 +39,7 @@ function Get-PowerShellCard
 
         Write-Verbose -Message "Picking Card # $CardToPick"
         Write-Verbose -Message "Place the card # $CardToPick in the taken pile"
-        $CardsNotAvailable += $CardToPick
+        $CardToPick | Out-File .\CardsNotAvailable.txt -Append
         Write-Verbose -Message "Read the Card"
         Write-Verbose -Message "`n`n`tWhat is the following Character(s) used for `n`t$($CardDeck[$CardToPick])"
     }
