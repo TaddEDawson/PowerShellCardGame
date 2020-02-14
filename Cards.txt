@@ -1,0 +1,43 @@
+Tab
+-
+$
+;
+<>
+[]
+{}
+`
+()
+.
+#
+""
+>>
+>
+@''@
+@""@
+''
+::
+$_
+$_PSItem
+&
+--%
+<# #>
+\
+:
+..
+!
+...
+*
+-f
+%
+if
+for
+foreach
+While
+Do While
+Do Until
+ForEach-Object
+Out-GridView
+Get-Member
+Get-Help
+Get-Command
+Objects
